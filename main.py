@@ -48,7 +48,7 @@ async def on_message(message):
     for user in message.mentions:
         if user.id in bot.afk_users:
             reason = bot.afk_users[user.id]
-            await message.channel.send(f"{user.name} şu anda AFK! Sebep: {reason}")
+            await message.channel.send(f"{user.name} şu anda **afk!** Sebep: **{reason}**")
 
     await bot.process_commands(message)
 
