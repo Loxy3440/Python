@@ -4,6 +4,9 @@ import os
 import datetime
 from dotenv import load_dotenv
 import pytz
+from keep_alive import keep_alive
+
+keep_alive()
 
 load_dotenv()
 
