@@ -1,0 +1,11 @@
+services:
+  - type: worker
+    name: python-bot
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    envVars:
+      - key: TOKEN
+        fromSecret: DISCORD_TOKEN
+      - key: owner
+        fromSecret: OWNER_ID
