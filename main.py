@@ -124,6 +124,110 @@ async def pythonen(ctx):
 async def ahmetkaya(ctx):
     await ctx.send("https://cdn.discordapp.com/attachments/1413561809771692239/1413623961190793347/Screenshot_20250816-170701.jpg?ex=68bc9b68&is=68bb49e8&hm=274cba55687980117d754d584566ee10db57fe59e92fb4c1b01a06b229a95837&")
 
+# Botunuzun başında bir değişken olarak
+bot.log_channel_id = None
+
+@bot.command()
+@commands.is_owner()
+async def set_log_channel(ctx, channel: discord.TextChannel = None):
+    """Log kanalını ayarlar"""
+    if channel is None:
+        channel = ctx.channel
+    
+    bot.log_channel_id = channel.id
+    await ctx.send(f"✅ **Log kanalı ayarlandı:** {channel.mention}")
+
+
+
+@bot.command()
+@commands.is_owner()
+async def restart(ctx):
+    """Botu yeniden başlat (Render uyumlu)"""
+    
+    class ConfirmView(discord.ui.View):
+        def __init__(self):
+            super().__init__(timeout=30)
+        
+        @discord.ui.button(label="Onayla", style=discord.ButtonStyle.green)
+        async def confirm(self, button, interaction):
+            if interaction.user.id != ctx.author.id:
+                await interaction.response.send_message("Sadece komutu kullanan onaylayabilir!", ephemeral=True)
+                return
+                
+            await interaction.response.send_message("Bot yeniden başlatılıyor...", ephemeral=True)
+            
+            # Log gönder
+            await send_log_embed(
+                "Bot Restarted",
+                f"Restart by: {ctx.author.mention} ({ctx.author.id})\nID: {ctx.author.id}",
+                discord.Color.orange()
+            )
+            
+            # Render deploy hook ile restart
+            deploy_hook_url = os.getenv('RENDER_DEPLOY_HOOK')
+            
+            if deploy_hook_url:
+                try:
+                    response = requests.post(deploy_hook_url)
+                    if response.status_code == 200:
+                        await ctx.send("✅ **Redeploy tetiklendi! Bot yeniden başlatılıyor...**")
+                    else:
+                        await ctx.send(f"❌ **Hata:** Status code {response.status_code}")
+                except Exception as e:
+                    await ctx.send(f"❌ **Deploy hatası:** {e}")
+            else:
+                await ctx.send("❌ **Deploy hook URL bulunamadı!**")
+            
+            self.stop()
+        
+        @discord.ui.button(label="Iptal", style=discord.ButtonStyle.red)
+        async def cancel(self, button, interaction):
+            await interaction.response.send_message("Restart iptal edildi.", ephemeral=True)
+            
+            # İptal logu
+            await send_log_embed(
+                "Restart Iptal Edildi",
+                f"By: {ctx.author.mention} ({ctx.author.id})",
+                discord.Color.red()
+            )
+            
+            await interaction.message.delete()
+            self.stop()
+    
+    # Embed mesajı
+    embed = discord.Embed(
+        title="Botu Yeniden Baslat",
+        description="Botu yeniden baslatmak istedigine emin misin?",
+        color=discord.Color.orange()
+    )
+    
+    await ctx.send(embed=embed, view=ConfirmView())
+
+
+async def send_log_embed(title, description, color=discord.Color.blue()):
+    """Log embed'ini ayarlanan kanala gönderir"""
+    if bot.log_channel_id is None:
+        print(f"LOG (Kanal ayarlı değil): {title} - {description}")
+        return
+    
+    try:
+        channel = bot.get_channel(bot.log_channel_id)
+        if channel is None:
+            print(f"LOG (Kanal bulunamadı): {title} - {description}")
+            return
+        
+        embed = discord.Embed(
+            title=title,
+            description=description,
+            color=color,
+            timestamp=discord.utils.utcnow()
+        )
+        
+        await channel.send(embed=embed)
+        
+    except Exception as e:
+        print(f"Log gönderilemedi: {e}")
+
 # AFK System
 @bot.command()
 async def afk(ctx, *, reason=None):
@@ -142,24 +246,75 @@ async def afk(ctx, *, reason=None):
 
 
 @bot.command()
+@commands.is_owner()
+async def restart(ctx):
+    """Botu yeniden başlat (Render uyumlu)"""
+    
+    class ConfirmView(discord.ui.View):
+        def __init__(self):
+            super().__init__(timeout=30)
+        
+        @discord.ui.button(label="Onayla", style=discord.ButtonStyle.green)
+        async def confirm(self, button, interaction):
+            if interaction.user.id != ctx.author.id:
+                await interaction.response.send_message("Sadece komutu kullanan onaylayabilir!", ephemeral=True)
+                return
+                
+            await interaction.response.send_message("Bot yeniden başlatılıyor...", ephemeral=True)
+            
+            # Log gönder
+            await send_log_embed(
+                "Bot Restarted",
+                f"Restart by: {ctx.author.mention} ({ctx.author.id})\nID: {ctx.author.id}",
+                discord.Color.orange()
+            )
+            
+            # Render deploy hook ile restart
+            deploy_hook_url = os.getenv('RENDER_DEPLOY_HOOK')
+            
+            if deploy_hook_url:
+                try:
+                    response = requests.post(deploy_hook_url)
+                    if response.status_code == 200:
+                        await ctx.send("✅ **Redeploy tetiklendi! Bot yeniden başlatılıyor...**")
+                    else:
+                        await ctx.send(f"❌ **Hata:** Status code {response.status_code}")
+                except Exception as e:
+                    await ctx.send(f"❌ **Deploy hatası:** {e}")
+            else:
+                await ctx.send("❌ **Deploy hook URL bulunamadı!**")
+            
+            self.stop()
+        
+        @discord.ui.button(label="Iptal", style=discord.ButtonStyle.red)
+        async def cancel(self, button, interaction):
+            await interaction.response.send_message("Restart iptal edildi.", ephemeral=True)
+            
+            # İptal logu
+            await send_log_embed(
+                "Restart Iptal Edildi",
+                f"By: {ctx.author.mention} ({ctx.author.id})",
+                discord.Color.red()
+            )
+            
+            await interaction.message.delete()
+            self.stop()
+    
+    # Embed mesajı
+    embed = discord.Embed(
+        title="Botu Yeniden Baslat",
+        description="Botu yeniden baslatmak istedigine emin misin?",
+        color=discord.Color.orange()
+    )
+    
+    await ctx.send(embed=embed, view=ConfirmView())
+
+
+@bot.command()
 async def haddinibil(ctx):
     await ctx.send("https://tenor.com/view/rte-receptayyip-erdo%C4%9Fan-haddinibil-rtehaddinibil-gif-21346531")
 
-@bot.command()
-@commands.is_owner()
-async def redeploy(ctx):
-    """Render webhook ile redeploy"""
-    webhook_url = os.getenv('RENDER_DEPLOY_HOOK')
-    
-    if webhook_url:
-        response = requests.post(webhook_url)
-        if response.status_code == 200:
-            await ctx.send('✅ Redeploy tetiklendi!')
-        else:
-            await ctx.send('❌ Redeploy başarısız')
-    else:
-        await ctx.send('❌ Webhook URL bulunamadı')
-        await ctx.send("Bu komutu sadece bot sahibi kullanabilir.")
+
         
 # .env dosyasından TOKEN değişkenini oku
 token = os.getenv('TOKEN')
