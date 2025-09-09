@@ -139,69 +139,6 @@ async def set_log_channel(ctx, channel: discord.TextChannel = None):
 
 
 
-@bot.command()
-@commands.is_owner()
-async def restart(ctx):
-    """Botu yeniden başlat (Render uyumlu)"""
-    
-    class ConfirmView(discord.ui.View):
-        def __init__(self):
-            super().__init__(timeout=30)
-        
-        @discord.ui.button(label="Onayla", style=discord.ButtonStyle.green)
-        async def confirm(self, button, interaction):
-            if interaction.user.id != ctx.author.id:
-                await interaction.response.send_message("Sadece komutu kullanan onaylayabilir!", ephemeral=True)
-                return
-                
-            await interaction.response.send_message("Bot yeniden başlatılıyor...", ephemeral=True)
-            
-            # Log gönder
-            await send_log_embed(
-                "Bot Restarted",
-                f"Restart by: {ctx.author.mention} ({ctx.author.id})\nID: {ctx.author.id}",
-                discord.Color.orange()
-            )
-            
-            # Render deploy hook ile restart
-            deploy_hook_url = os.getenv('RENDER_DEPLOY_HOOK')
-            
-            if deploy_hook_url:
-                try:
-                    response = requests.post(deploy_hook_url)
-                    if response.status_code == 200:
-                        await ctx.send("✅ **Redeploy tetiklendi! Bot yeniden başlatılıyor...**")
-                    else:
-                        await ctx.send(f"❌ **Hata:** Status code {response.status_code}")
-                except Exception as e:
-                    await ctx.send(f"❌ **Deploy hatası:** {e}")
-            else:
-                await ctx.send("❌ **Deploy hook URL bulunamadı!**")
-            
-            self.stop()
-        
-        @discord.ui.button(label="Iptal", style=discord.ButtonStyle.red)
-        async def cancel(self, button, interaction):
-            await interaction.response.send_message("Restart iptal edildi.", ephemeral=True)
-            
-            # İptal logu
-            await send_log_embed(
-                "Restart Iptal Edildi",
-                f"By: {ctx.author.mention} ({ctx.author.id})",
-                discord.Color.red()
-            )
-            
-            await interaction.message.delete()
-            self.stop()
-    
-    # Embed mesajı
-    embed = discord.Embed(
-        title="Botu Yeniden Baslat",
-        description="Botu yeniden baslatmak istedigine emin misin?",
-        color=discord.Color.orange()
-    )
-    
-    await ctx.send(embed=embed, view=ConfirmView())
 
 
 async def send_log_embed(title, description, color=discord.Color.blue()):
