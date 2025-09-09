@@ -127,43 +127,7 @@ async def ahmetkaya(ctx):
 # Botunuzun başında bir değişken olarak
 bot.log_channel_id = None
 
-@bot.command()
-@commands.is_owner()
-async def set_log_channel(ctx, channel: discord.TextChannel = None):
-    """Log kanalını ayarlar"""
-    if channel is None:
-        channel = ctx.channel
-    
-    bot.log_channel_id = channel.id
-    await ctx.send(f"✅ **Log kanalı ayarlandı:** {channel.mention}")
 
-
-
-
-
-async def send_log_embed(title, description, color=discord.Color.blue()):
-    """Log embed'ini ayarlanan kanala gönderir"""
-    if bot.log_channel_id is None:
-        print(f"LOG (Kanal ayarlı değil): {title} - {description}")
-        return
-    
-    try:
-        channel = bot.get_channel(bot.log_channel_id)
-        if channel is None:
-            print(f"LOG (Kanal bulunamadı): {title} - {description}")
-            return
-        
-        embed = discord.Embed(
-            title=title,
-            description=description,
-            color=color,
-            timestamp=discord.utils.utcnow()
-        )
-        
-        await channel.send(embed=embed)
-        
-    except Exception as e:
-        print(f"Log gönderilemedi: {e}")
 
 # AFK System
 @bot.command()
@@ -182,53 +146,32 @@ async def afk(ctx, *, reason=None):
     await ctx.send(embed=embed)
 
 
+import os
+import requests
+from discord.ext import commands
+
 @bot.command()
 @commands.is_owner()
 async def restart(ctx):
-    """Botu yeniden başlat"""
+    """Botu yeniden başlatır"""
     
-    # Buton callback'leri için ayrı fonksiyonlar
-    async def confirm_callback(interaction):
-        if interaction.user.id != ctx.author.id:
-            await interaction.response.send_message("Sadece komutu kullanan onaylayabilir!", ephemeral=True)
-            return
-            
-        await interaction.response.send_message("Bot yeniden başlatılıyor...", ephemeral=True)
+    deploy_hook_url = os.getenv('RENDER_DEPLOY_HOOK')
+    
+    if not deploy_hook_url:
+        await ctx.send("❌ **Deploy hook URL bulunamadı!**")
+        return
+    
+    try:
+        await ctx.send("🔄 **Bot yeniden başlatılıyor...**")
+        response = requests.post(deploy_hook_url)
         
-        deploy_hook_url = os.getenv('RENDER_DEPLOY_HOOK')
-        if deploy_hook_url:
-            requests.post(deploy_hook_url)
-            await ctx.send("✅ **Deploy tetiklendi!**")
+        if response.status_code == 200:
+            await ctx.send("✅ **Redeploy tetiklendi!** Bot kısa sürede yeniden başlayacak.")
         else:
-            await ctx.send("❌ **Deploy hook bulunamadı!**")
-    
-    async def cancel_callback(interaction):
-        if interaction.user.id != ctx.author.id:
-            await interaction.response.send_message("Sadece komutu kullanan iptal edebilir!", ephemeral=True)
-            return
+            await ctx.send(f"❌ **Hata:** Status code {response.status_code}")
             
-        await interaction.response.send_message("İptal edildi.", ephemeral=True)
-        await interaction.message.delete()
-    
-    # View ve butonlar
-    view = discord.ui.View(timeout=30)
-    
-    confirm_btn = discord.ui.Button(label="Onayla", style=discord.ButtonStyle.green)
-    cancel_btn = discord.ui.Button(label="Iptal", style=discord.ButtonStyle.red)
-    
-    confirm_btn.callback = confirm_callback
-    cancel_btn.callback = cancel_callback
-    
-    view.add_item(confirm_btn)
-    view.add_item(cancel_btn)
-    
-    embed = discord.Embed(
-        title="Botu Yeniden Baslat",
-        description="Botu yeniden baslatmak istedigine emin misin?",
-        color=discord.Color.orange()
-    )
-    
-    await ctx.send(embed=embed, view=view)
+    except Exception as e:
+        await ctx.send(f"❌ **Hata:** {e}")
 
 @bot.command()
 async def haddinibil(ctx):
