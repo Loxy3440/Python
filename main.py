@@ -1,18 +1,18 @@
-import discord 
+import discord
 from discord.ext import commands
 import os
 import datetime
 from dotenv import load_dotenv
 import pytz
-import sys
-import asyncio
+from keep_alive import keep_alive
+
+keep_alive()
 
 load_dotenv()
 
 intents = discord.Intents.default()
 intents.message_content = True
-bot = commands.Bot(command_prefix='!', intents=intents)
-bot.remove_command('help')
+bot = commands.Bot(command_prefix='!', intents=intents, help_command=None)
 
 # Initialize afk_users as a bot attribute to ensure it persists
 bot.afk_users = {}
@@ -48,7 +48,7 @@ async def on_message(message):
     for user in message.mentions:
         if user.id in bot.afk_users:
             reason = bot.afk_users[user.id]
-            await message.channel.send(f"{user.name} şu anda AFK! Sebep: {reason}")
+            await message.channel.send(f"{user.name} şu anda **afk!** Sebep: **{reason}**")
 
     await bot.process_commands(message)
 
@@ -76,7 +76,7 @@ async def ping(ctx):
 
 @bot.command()
 async def deneme(ctx):
-    await ctx.send("__TEST AŞAMASINDA__. **MERAK ETTİĞİN BİR ŞEY VARSA _<@950430488454127627>_ BU HESABA SORABİLİRSİN**")
+    await ctx.send("__TEST AŞAMASINDA__. **MERAK ETTİĞİN BİR ŞEY VARSA <@950430488454127627> BU HESABA SORABİLİRSİN**")
 
 @bot.command()
 async def pythontr(ctx):
@@ -139,6 +139,7 @@ async def afk(ctx, *, reason=None):
     embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
     await ctx.send(embed=embed)
 
+
 @bot.command()
 async def haddinibil(ctx):
     await ctx.send("https://tenor.com/view/rte-receptayyip-erdo%C4%9Fan-haddinibil-rtehaddinibil-gif-21346531")
@@ -162,15 +163,14 @@ async def close(ctx):
         await bot.close()
     else:
         await ctx.send("Bu komutu sadece bot sahibi kullanabilir.")
+        
+# .env dosyasından TOKEN değişkenini oku
+token = os.getenv('TOKEN')
+if not token:
+    print("HATA: .env dosyasında TOKEN bulunamadı!")
+    print("Lütfen .env dosyanızı kontrol edin:")
+    print("TOKEN=bot_tokeniniz_buraya")
+    print("owner=950430488454127627")
+    exit(1)
 
-
-
-@bot.command()
-async def clear(ctx, amount: int):
-    if amount < 1:
-        await ctx.send("Lütfen 1 veya daha fazla mesaj silmek için geçerli bir sayı girin.")
-        return
-    deleted = await ctx.channel.purge(limit=amount + 1)
-    await ctx.send(f"**{len(deleted)-1}** mesaj silindi!", delete_after=4)
-
-bot.run(os.getenv('TOKEN'))
+bot.run(token)
