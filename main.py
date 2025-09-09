@@ -185,76 +185,50 @@ async def afk(ctx, *, reason=None):
 @bot.command()
 @commands.is_owner()
 async def restart(ctx):
-    """Botu yeniden başlat (Render uyumlu)"""
+    """Botu yeniden başlat"""
     
-    class ConfirmView(discord.ui.View):
-        def __init__(self):
-            super().__init__(timeout=30)
+    # Buton callback'leri için ayrı fonksiyonlar
+    async def confirm_callback(interaction):
+        if interaction.user.id != ctx.author.id:
+            await interaction.response.send_message("Sadece komutu kullanan onaylayabilir!", ephemeral=True)
+            return
+            
+        await interaction.response.send_message("Bot yeniden başlatılıyor...", ephemeral=True)
         
-        @discord.ui.button(label="Onayla", style=discord.ButtonStyle.green)
-        async def confirm_button(self, button, interaction):
-            if interaction.user.id != ctx.author.id:
-                await interaction.response.send_message("Sadece komutu kullanan onaylayabilir!", ephemeral=True)
-                return
-                
-            await interaction.response.send_message("Bot yeniden başlatılıyor...", ephemeral=True)
-            
-            # Log gönder (eğer fonksiyonunuz varsa)
-            try:
-                await send_log_embed(
-                    "Bot Restarted",
-                    f"Restart by: {ctx.author.mention} ({ctx.author.id})",
-                    discord.Color.orange()
-                )
-            except:
-                pass
-            
-            # Render deploy hook ile restart
-            deploy_hook_url = os.getenv('RENDER_DEPLOY_HOOK')
-            
-            if deploy_hook_url:
-                try:
-                    response = requests.post(deploy_hook_url)
-                    if response.status_code == 200:
-                        await ctx.send("✅ **Restart tetiklendi! Bot yeniden başlatılıyor...**")
-                    else:
-                        await ctx.send(f"❌ **Hata:** Status code {response.status_code}")
-                except Exception as e:
-                    await ctx.send(f"❌ **Deploy hatası:** {e}")
-            else:
-                await ctx.send("❌ **Deploy hook URL bulunamadı!**")
-            
-            self.stop()
-        
-        @discord.ui.button(label="Iptal", style=discord.ButtonStyle.red)
-        async def cancel_button(self, button, interaction):
-            if interaction.user.id != ctx.author.id:
-                await interaction.response.send_message("Sadece komutu kullanan iptal edebilir!", ephemeral=True)
-                return
-                
-            await interaction.response.send_message("Restart iptal edildi.", ephemeral=True)
-            
-            # İptal logu (eğer fonksiyonunuz varsa)
-            try:
-                await send_log_embed(
-                    "Restart Iptal Edildi",
-                    f"By: {ctx.author.mention} ({ctx.author.id})",
-                    discord.Color.red()
-                )
-            except:
-                pass
-            
-            await interaction.message.delete()
-            self.stop()
+        deploy_hook_url = os.getenv('RENDER_DEPLOY_HOOK')
+        if deploy_hook_url:
+            requests.post(deploy_hook_url)
+            await ctx.send("✅ **Deploy tetiklendi!**")
+        else:
+            await ctx.send("❌ **Deploy hook bulunamadı!**")
     
-    # Embed mesajı
+    async def cancel_callback(interaction):
+        if interaction.user.id != ctx.author.id:
+            await interaction.response.send_message("Sadece komutu kullanan iptal edebilir!", ephemeral=True)
+            return
+            
+        await interaction.response.send_message("İptal edildi.", ephemeral=True)
+        await interaction.message.delete()
+    
+    # View ve butonlar
+    view = discord.ui.View(timeout=30)
+    
+    confirm_btn = discord.ui.Button(label="Onayla", style=discord.ButtonStyle.green)
+    cancel_btn = discord.ui.Button(label="Iptal", style=discord.ButtonStyle.red)
+    
+    confirm_btn.callback = confirm_callback
+    cancel_btn.callback = cancel_callback
+    
+    view.add_item(confirm_btn)
+    view.add_item(cancel_btn)
+    
     embed = discord.Embed(
         title="Botu Yeniden Baslat",
         description="Botu yeniden baslatmak istedigine emin misin?",
         color=discord.Color.orange()
     )
     
-    await ctx.send(embed=embed, view=ConfirmView())
+    await ctx.send(embed=embed, view=view)
 
 @bot.command()
 async def haddinibil(ctx):
