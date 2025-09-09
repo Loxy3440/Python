@@ -192,19 +192,22 @@ async def restart(ctx):
             super().__init__(timeout=30)
         
         @discord.ui.button(label="Onayla", style=discord.ButtonStyle.green)
-        async def confirm(self, button, interaction):
+        async def confirm_button(self, button, interaction):
             if interaction.user.id != ctx.author.id:
                 await interaction.response.send_message("Sadece komutu kullanan onaylayabilir!", ephemeral=True)
                 return
                 
             await interaction.response.send_message("Bot yeniden başlatılıyor...", ephemeral=True)
             
-            # Log gönder
-            await send_log_embed(
-                "Bot Restarted",
-                f"Restart by: {ctx.author.mention} ({ctx.author.id})\nID: {ctx.author.id}",
-                discord.Color.orange()
-            )
+            # Log gönder (eğer fonksiyonunuz varsa)
+            try:
+                await send_log_embed(
+                    "Bot Restarted",
+                    f"Restart by: {ctx.author.mention} ({ctx.author.id})",
+                    discord.Color.orange()
+                )
+            except:
+                pass
             
             # Render deploy hook ile restart
             deploy_hook_url = os.getenv('RENDER_DEPLOY_HOOK')
@@ -213,7 +216,7 @@ async def restart(ctx):
                 try:
                     response = requests.post(deploy_hook_url)
                     if response.status_code == 200:
-                        await ctx.send("✅ **Redeploy tetiklendi! Bot yeniden başlatılıyor...**")
+                        await ctx.send("✅ **Restart tetiklendi! Bot yeniden başlatılıyor...**")
                     else:
                         await ctx.send(f"❌ **Hata:** Status code {response.status_code}")
                 except Exception as e:
@@ -224,15 +227,22 @@ async def restart(ctx):
             self.stop()
         
         @discord.ui.button(label="Iptal", style=discord.ButtonStyle.red)
-        async def cancel(self, button, interaction):
+        async def cancel_button(self, button, interaction):
+            if interaction.user.id != ctx.author.id:
+                await interaction.response.send_message("Sadece komutu kullanan iptal edebilir!", ephemeral=True)
+                return
+                
             await interaction.response.send_message("Restart iptal edildi.", ephemeral=True)
             
-            # İptal logu
-            await send_log_embed(
-                "Restart Iptal Edildi",
-                f"By: {ctx.author.mention} ({ctx.author.id})",
-                discord.Color.red()
-            )
+            # İptal logu (eğer fonksiyonunuz varsa)
+            try:
+                await send_log_embed(
+                    "Restart Iptal Edildi",
+                    f"By: {ctx.author.mention} ({ctx.author.id})",
+                    discord.Color.red()
+                )
+            except:
+                pass
             
             await interaction.message.delete()
             self.stop()
@@ -245,7 +255,6 @@ async def restart(ctx):
     )
     
     await ctx.send(embed=embed, view=ConfirmView())
-
 
 @bot.command()
 async def haddinibil(ctx):
