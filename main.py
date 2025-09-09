@@ -5,6 +5,7 @@ import datetime
 from dotenv import load_dotenv
 import pytz
 from keep_alive import keep_alive
+import requests
 
 keep_alive()
 
@@ -145,23 +146,19 @@ async def haddinibil(ctx):
     await ctx.send("https://tenor.com/view/rte-receptayyip-erdo%C4%9Fan-haddinibil-rtehaddinibil-gif-21346531")
 
 @bot.command()
-async def close(ctx):
-    utc_time = datetime.datetime.utcnow()
-    turkey_time = utc_time + datetime.timedelta(hours=3)
-    owner_id = int(os.getenv('OWNER'))
+@commands.is_owner()
+async def redeploy(ctx):
+    """Render webhook ile redeploy"""
+    webhook_url = os.getenv('RENDER_DEPLOY_HOOK')
     
-    embed = discord.Embed(
-        title="Bot Kapatılıyor",
-        description="Bot Kapatıldı!",
-        timestamp=turkey_time,
-        color=0xff0000
-    )
-    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1413561809771692239/1413992512917606514/python-logo.png?ex=68bfece5&is=68be9b65&hm=139dcd1ededf39864526676613c0b09ff3d71f4d418343a13d6575e62d420ea2&")
-    embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
-    await ctx.send(embed=embed)
-    if ctx.author.id == owner_id:
-        await bot.close()
+    if webhook_url:
+        response = requests.post(webhook_url)
+        if response.status_code == 200:
+            await ctx.send('✅ Redeploy tetiklendi!')
+        else:
+            await ctx.send('❌ Redeploy başarısız')
     else:
+        await ctx.send('❌ Webhook URL bulunamadı')
         await ctx.send("Bu komutu sadece bot sahibi kullanabilir.")
         
 # .env dosyasından TOKEN değişkenini oku
