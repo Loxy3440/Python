@@ -43,7 +43,7 @@ async def on_message(message):
     # AFK system
     if message.author.id in bot.afk_users:
         reason = bot.afk_users.pop(message.author.id)
-        await message.channel.send(f"Hoşgeldin {message.author.mention}, **AFK** modundan çıktı!")
+        await message.channel.send(f"Hoşgeldin {message.author.mention}, **AFK** modundan çıktı! <a:1000045246:1415457313342357616> ")
 
     # Check if any mentioned users are AFK
     for user in message.mentions:
