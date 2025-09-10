@@ -76,7 +76,7 @@ async def ping(ctx):
 
 @bot.command()
 async def deneme(ctx):
-    await ctx.send("__TEST AŞAMASINDA__. **MERAK ETTİĞİN BİR ŞEY VARSA <@950430488454127627> BU HESABA SORABİLİRSİN** <a:8484hearts:1415374810497941574> ")
+    await ctx.send("<:1000045006:1415428165752324370> __TEST AŞAMASINDA__. **MERAK ETTİĞİN BİR ŞEY VARSA <@950430488454127627> BU HESABA SORABİLİRSİN** <a:8484hearts:1415374810497941574> ")
 
 
 @bot.command()
