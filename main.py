@@ -55,8 +55,8 @@ async def on_message(message):
 
 @bot.command()
 async def ping(ctx):
-    utc_time = datetime.datetime.utcnow()
-    turkey_time = utc_time + datetime.timedelta(hours=3)
+    turkey_tz = pytz.timezone('Europe/Istanbul')
+    turkey_time = datetime.datetime.now(turkey_tz)
 
     embed = discord.Embed(
         title="Python Bot",
@@ -76,7 +76,7 @@ async def ping(ctx):
 
 @bot.command()
 async def deneme(ctx):
-    await ctx.send("<:1000045006:1415428165752324370> __TEST AŞAMASINDA__. **MERAK ETTİĞİN BİR ŞEY VARSA <@950430488454127627> BU HESABA SORABİLİRSİN** <a:Hearts:1415383408208511158> ")
+    await ctx.send("<a:1000045039:1415459602656657429> __TEST AŞAMASINDA__. **MERAK ETTİĞİN BİR ŞEY VARSA <@950430488454127627> BU HESABA SORABİLİRSİN** <a:Hearts:1415383408208511158> ")
 
 
 @bot.command()
