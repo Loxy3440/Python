@@ -49,7 +49,7 @@ async def on_message(message):
     for user in message.mentions:
         if user.id in bot.afk_users:
             reason = bot.afk_users[user.id]
-            await message.channel.send(f"{user.name} şu anda <a:afk:1415383493613064303> **afk!** Sebep: **{reason}**")
+            await message.channel.send(f"{user.name} şu anda <a:afk:1415383493613064303> **afk!** Sebep: **{reason}** <:Cat:1415447386632880139> ")
 
     await bot.process_commands(message)
 
@@ -68,7 +68,7 @@ async def ping(ctx):
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1413561809771692239/1413610825075261480/python-logo.png?ex=68bc8f2c&is=68bb3dac&hm=7e806c6f781e42a2fda97343ffc030b890d341c81b446ce091ee3541758fc5aa&")
     embed.add_field(name="Library", value="py-cord", inline=True)
     embed.add_field(name="Version", value="3.11.9", inline=True)
-    embed.add_field(name="Language", value="<:1000045010:1415431159130620024> Python", inline=True)
+    embed.add_field(name="Language", value="<:1000045010:1415431159130620024>", inline=True)
     embed.add_field(name="Hosted on", value="Render", inline=True)
     embed.add_field(name="My Prefix", value="**!**", inline=True)
     embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
@@ -76,13 +76,13 @@ async def ping(ctx):
 
 @bot.command()
 async def deneme(ctx):
-    await ctx.send("<:1000045006:1415428165752324370> __TEST AŞAMASINDA__. **MERAK ETTİĞİN BİR ŞEY VARSA <@950430488454127627> BU HESABA SORABİLİRSİN** <:8484hearts:1415374810497941574> ")
+    await ctx.send("<:1000045006:1415428165752324370> __TEST AŞAMASINDA__. **MERAK ETTİĞİN BİR ŞEY VARSA <@950430488454127627> BU HESABA SORABİLİRSİN** <a:Hearts:1415383408208511158> ")
 
 
 @bot.command()
 async def pythontr(ctx):
-    utc_time = datetime.datetime.utcnow()
-    turkey_time = utc_time + datetime.timedelta(hours=3)
+    turkey_tz = pytz.timezone('Europe/Istanbul')
+    turkey_time = datetime.datetime.now(turkey_tz)
 
     embed = discord.Embed(
         title="<:1000045010:1415431159130620024> Python",
@@ -93,7 +93,7 @@ async def pythontr(ctx):
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1413561809771692239/1413992512917606514/python-logo.png?ex=68bfece5&is=68be9b65&hm=139dcd1ededf39864526676613c0b09ff3d71f4d418343a13d6575e62d420ea2&")
     embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
     view = discord.ui.View()
-    view.add_item(discord.ui.Button(label="Video#1", url="https://youtu.be/_wZUNiGtkcw?si=eL_ybYhg_v5w6TqA", emoji="<:youtube:1414975498467016764>", style=discord.ButtonStyle.red))
+    view.add_item(discord.ui.Button(label="Video#1", url="https://youtu.be/_wZUNiGtkcw?si=eL_ybYhg_v5w6TqA", emoji="<a:1000045048:1415448585712963686>", style=discord.ButtonStyle.red))
     view.add_item(discord.ui.Button(label="Video#2", url="https://youtu.be/CEr_UiR4Gvk?si=rzu8yYYvu5THBFEt", emoji="<:youtube:1414975498467016764>", style=discord.ButtonStyle.red))
     view.add_item(discord.ui.Button(label="Video#3", url="https://youtu.be/g4oIzj8fiCQ?si=i437FCMJqtVlff4Y", emoji="<:youtube:1414975498467016764>", style=discord.ButtonStyle.red))
     view.add_item(discord.ui.Button(label="Video#4", url="https://youtu.be/0KQp2v5vrV8?si=XpNLHmspKkTtInb8", emoji="<:youtube:1414975498467016764>", style=discord.ButtonStyle.red))
@@ -102,8 +102,8 @@ async def pythontr(ctx):
 
 @bot.command()
 async def pythonen(ctx):
-    utc_time = datetime.datetime.utcnow()
-    turkey_time = utc_time + datetime.timedelta(hours=3)
+    turkey_tz = pytz.timezone('Europe/Istanbul')
+    turkey_time = datetime.datetime.now(turkey_tz)
     
     embed = discord.Embed(
         title="<:1000045010:1415431159130620024> Python",
@@ -181,8 +181,8 @@ async def owner(ctx):
 
 @bot.command()
 async def close(ctx):
-    utc_time = datetime.datetime.utcnow()
-    turkey_time = utc_time + datetime.timedelta(hours=3)
+    turkey_tz = pytz.timezone('Europe/Istanbul')
+    turkey_time = datetime.datetime.now(turkey_tz)
     owner_id = int(os.getenv('OWNER'))
     
     embed = discord.Embed(
