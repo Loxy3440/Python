@@ -131,8 +131,8 @@ async def ahmetkaya(ctx):
 # AFK System
 @bot.command()
 async def afk(ctx, *, reason=None):
-    utc_time = datetime.datetime.utcnow()
-    turkey_time = utc_time + datetime.timedelta(hours=3)
+    turkey_tz = pytz.timezone('Europe/Istanbul')
+    turkey_time = datetime.datetime.now(turkey_tz)
     bot.afk_users[ctx.author.id] = reason or "AFK"
     embed = discord.Embed(
         title="<a:afk:1415383493613064303> AFK Mode",
