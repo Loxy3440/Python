@@ -102,9 +102,7 @@ async def pythontr(ctx):
     view.add_item(discord.ui.Button(label="Video#5", url="https://youtu.be/g4oIzj8fiCQ?si=N4qzik7l1U_sYd8D", emoji="<:youtube:1414975498467016764>", style=discord.ButtonStyle.red))
     await ctx.send(embed=embed, view=view)
 
-@bot.command()
-async def deneme(ctx):
-    await ctx.send("__TEST AŞAMASINDA__. **MERAK ETTİĞİN BİR ŞEY VARSA <@950430488454127627> BU HESABA SORABİLİRSİN**")
+
 
 @bot.command()
 async def pythontr(ctx):
@@ -151,8 +149,7 @@ async def pythonen(ctx):
 async def ahmetkaya(ctx):
     await ctx.send("https://cdn.discordapp.com/attachments/1413561809771692239/1413623961190793347/Screenshot_20250816-170701.jpg?ex=68bc9b68&is=68bb49e8&hm=274cba55687980117d754d584566ee10db57fe59e92fb4c1b01a06b229a95837&")
 
-# Botunuzun başında bir değişken olarak
-bot.log_channel_id = None
+
 
 
 
