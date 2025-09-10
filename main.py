@@ -21,7 +21,24 @@ bot.afk_users = {}
 @bot.event
 async def on_ready():
     print(f'We have logged in as {bot.user}')
-    await bot.change_presence(activity=discord.Game(name="!help"))
+
+    async def update_stats():
+        while True:
+            total_users = sum(len(guild.members) for guild in bot.guilds)
+            total_guilds = len(bot.guilds)
+            
+            activities = [
+                discord.Activity(type=discord.ActivityType.watching, name=f"<:1000045267:1415474437922230334> {total_users} kullanıcı"),
+                discord.Activity(type=discord.ActivityType.watching, name=f"<:1000045268:1415475053159649340> {total_guilds} sunucu"),
+                discord.Activity(type=discord.ActivityType.playing, name="!help")
+            ]
+            
+            for activity in activities:
+                await bot.change_presence(activity=activity)
+                await asyncio.sleep(30)
+    
+    # Arka planda güncellemeyi başlat
+    bot.loop.create_task(update_stats())
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -60,7 +77,7 @@ async def ping(ctx):
 
     embed = discord.Embed(
         title="Python Bot",
-        description=f" **Latency**: {round(bot.latency * 1000)}ms <a:Wifi:1415437265915871295>",
+        description=f" **Latency**: {round(bot.latency * 1000)}ms <a:1000045255:1415471057254617129>",
         color=0x216bff,
         timestamp=turkey_time
     )
@@ -76,7 +93,7 @@ async def ping(ctx):
 
 @bot.command()
 async def deneme(ctx):
-    await ctx.send("<a:1000045039:1415459602656657429> __TEST AŞAMASINDA__. **MERAK ETTİĞİN BİR ŞEY VARSA <@950430488454127627> BU HESABA SORABİLİRSİN** <a:Hearts:1415383408208511158> ")
+    await ctx.send("<a:1000045039:1415459602656657429> __TEST AŞAMASINDA__. **MERAK ETTİĞİN BİR ŞEY VARSA <@950430488454127627> BU HESABA SORABİLİRSİN** <a:Hearts:1415383408208511158> <a:1000045256:1415471089290707094> ")
 
 
 @bot.command()
@@ -93,11 +110,11 @@ async def pythontr(ctx):
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1413561809771692239/1413992512917606514/python-logo.png?ex=68bfece5&is=68be9b65&hm=139dcd1ededf39864526676613c0b09ff3d71f4d418343a13d6575e62d420ea2&")
     embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
     view = discord.ui.View()
-    view.add_item(discord.ui.Button(label="Video#1", url="https://youtu.be/_wZUNiGtkcw?si=eL_ybYhg_v5w6TqA", emoji="<a:1000045048:1415448585712963686>", style=discord.ButtonStyle.red))
-    view.add_item(discord.ui.Button(label="Video#2", url="https://youtu.be/CEr_UiR4Gvk?si=rzu8yYYvu5THBFEt", emoji="<:youtube:1414975498467016764>", style=discord.ButtonStyle.red))
-    view.add_item(discord.ui.Button(label="Video#3", url="https://youtu.be/g4oIzj8fiCQ?si=i437FCMJqtVlff4Y", emoji="<:youtube:1414975498467016764>", style=discord.ButtonStyle.red))
-    view.add_item(discord.ui.Button(label="Video#4", url="https://youtu.be/0KQp2v5vrV8?si=XpNLHmspKkTtInb8", emoji="<:youtube:1414975498467016764>", style=discord.ButtonStyle.red))
-    view.add_item(discord.ui.Button(label="Video#5", url="https://youtu.be/g4oIzj8fiCQ?si=N4qzik7l1U_sYd8D", emoji="<:youtube:1414975498467016764>", style=discord.ButtonStyle.red))
+    view.add_item(discord.ui.Button(label="Video#1", url="https://youtu.be/_wZUNiGtkcw?si=eL_ybYhg_v5w6TqA", emoji="<:1000045047:1415448594621796352>", style=discord.ButtonStyle.red))
+    view.add_item(discord.ui.Button(label="Video#2", url="https://youtu.be/CEr_UiR4Gvk?si=rzu8yYYvu5THBFEt", emoji="<:1000045047:1415448594621796352>", style=discord.ButtonStyle.red))
+    view.add_item(discord.ui.Button(label="Video#3", url="https://youtu.be/g4oIzj8fiCQ?si=i437FCMJqtVlff4Y", emoji="<:1000045047:1415448594621796352>", style=discord.ButtonStyle.red))
+    view.add_item(discord.ui.Button(label="Video#4", url="https://youtu.be/0KQp2v5vrV8?si=XpNLHmspKkTtInb8", emoji="<:1000045047:1415448594621796352>", style=discord.ButtonStyle.red))
+    view.add_item(discord.ui.Button(label="Video#5", url="https://youtu.be/g4oIzj8fiCQ?si=N4qzik7l1U_sYd8D", emoji="<:1000045047:1415448594621796352>", style=discord.ButtonStyle.red))
     await ctx.send(embed=embed, view=view)
 
 @bot.command()
@@ -115,9 +132,9 @@ async def pythonen(ctx):
     embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
     view = discord.ui.View()
     
-    view.add_item(discord.ui.Button(label="Video#1", url="https://youtu.be/mB0EBW-vDSQ?si=hdIB3r6lO41mlrNb", emoji="<:youtube:1414975498467016764>", style=discord.ButtonStyle.red))
-    view.add_item(discord.ui.Button(label="Video#2", url="https://youtu.be/St48epdRDZw?si=um7Q8epQ3SiaXlhL", emoji="<:youtube:1414975498467016764>", style=discord.ButtonStyle.red))
-    view.add_item(discord.ui.Button(label="Video#3", url="https://youtu.be/ix9cRaBkVe0?si=YI1XTQe7isDILW77", emoji="<:youtube:1414975498467016764>", style=discord.ButtonStyle.red))
+    view.add_item(discord.ui.Button(label="Video#1", url="https://youtu.be/mB0EBW-vDSQ?si=hdIB3r6lO41mlrNb", emoji="<:1000045047:1415448594621796352>", style=discord.ButtonStyle.red))
+    view.add_item(discord.ui.Button(label="Video#2", url="https://youtu.be/St48epdRDZw?si=um7Q8epQ3SiaXlhL", emoji="<:1000045047:1415448594621796352>", style=discord.ButtonStyle.red))
+    view.add_item(discord.ui.Button(label="Video#3", url="https://youtu.be/ix9cRaBkVe0?si=YI1XTQe7isDILW77", emoji="<:1000045047:1415448594621796352>", style=discord.ButtonStyle.red))
     await ctx.send(embed=embed, view=view)
 
 @bot.command()
