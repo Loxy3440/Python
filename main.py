@@ -22,9 +22,9 @@ bot.afk_users = {}
 @bot.event
 async def on_ready():
     print(f'We have logged in as {bot.user}')
-        total_users = sum(len(g.members) for g in bot.guilds)
+    total_users = sum(len(g.members) for g in bot.guilds)
     await bot.change_presence(activity=discord.Activity(
-        type=discord.ActivityType.watching,
+        type=discord.ActivityType.watching, 
         name=f"{total_users} kullanıcı"
     ))
 
