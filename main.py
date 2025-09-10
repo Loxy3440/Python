@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 import pytz
 from keep_alive import keep_alive
 import requests
+import asyncio
 
 keep_alive()
 
@@ -22,23 +23,23 @@ bot.afk_users = {}
 async def on_ready():
     print(f'We have logged in as {bot.user}')
 
-    async def update_stats():
-        while True:
-            total_users = sum(len(guild.members) for guild in bot.guilds)
-            total_guilds = len(bot.guilds)
-            
-            activities = [
-                discord.Activity(type=discord.ActivityType.watching, name=f"<:1000045267:1415474437922230334> {total_users} kullanıcı"),
-                discord.Activity(type=discord.ActivityType.watching, name=f"<:1000045268:1415475053159649340> {total_guilds} sunucu"),
-                discord.Activity(type=discord.ActivityType.playing, name="!help")
-            ]
-            
-            for activity in activities:
-                await bot.change_presence(activity=activity)
-                await asyncio.sleep(30)
     
-    # Arka planda güncellemeyi başlat
-    bot.loop.create_task(update_stats())
+    bot.loop.create_task(update_presence())
+
+async def update_presence():
+    await bot.wait_until_ready()
+    
+    while not bot.is_closed():
+        try:
+            total_users = sum(len(guild.members) for guild in bot.guilds)
+            activity = discord.Activity(
+                type=discord.ActivityType.watching,
+                name=f"{total_users} kullanıcı"
+            )
+            await bot.change_presence(activity=activity)
+            await asyncio.sleep(300)  # 5 dakika
+        except:
+            await asyncio.sleep(60)
 
 @bot.event
 async def on_command_error(ctx, error):
