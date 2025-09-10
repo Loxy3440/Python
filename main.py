@@ -49,7 +49,7 @@ async def on_message(message):
     for user in message.mentions:
         if user.id in bot.afk_users:
             reason = bot.afk_users[user.id]
-            await message.channel.send(f"{user.name} şu anda <a:2290zzzsleepy:1415352435827802122> **afk!** Sebep: **{reason}**")
+            await message.channel.send(f"{user.name} şu anda <a:afk:1415383493613064303> **afk!** Sebep: **{reason}**")
 
     await bot.process_commands(message)
 
@@ -60,7 +60,7 @@ async def ping(ctx):
 
     embed = discord.Embed(
         title="Python Bot",
-        description=f" **Latency**: {round(bot.latency * 1000)}ms <:6292goodconnection:1415371028657471601>",
+        description=f" **Latency**: {round(bot.latency * 1000)}ms <:Ping:1415383443235147848>",
         color=0x216bff,
         timestamp=turkey_time
     )
@@ -135,7 +135,7 @@ async def afk(ctx, *, reason=None):
     turkey_time = utc_time + datetime.timedelta(hours=3)
     bot.afk_users[ctx.author.id] = reason or "AFK"
     embed = discord.Embed(
-        title="<a:2290zzzsleepy:1415352435827802122> AFK Mode",
+        title="<a:afk:1415383493613064303> AFK Mode",
         description=f"{ctx.author.mention}, artık **AFK** modundasın!\n**Sebep:** {reason or 'Sebep belirtilmedi'}",
         color=0x216bff,
         timestamp=turkey_time
@@ -154,7 +154,7 @@ from discord.ext import commands
 async def restart(ctx):
     deploy_hook = os.getenv('RENDER_DEPLOY_HOOK')
     requests.post(deploy_hook)
-    await ctx.send("<a:5985discordloading:1415364278524838021> Bot yeniden başlatılıyor...")
+    await ctx.send("<a:discordloading:1415383563154620436> Bot yeniden başlatılıyor...")
 
 @bot.command()
 async def haddinibil(ctx):
@@ -166,7 +166,7 @@ async def notify_owner(ctx, message):
     owner_id = int(os.getenv('OWNER'))
     owner = await bot.fetch_user(owner_id)
     if owner:
-        await owner.send(f"<:2633notification:1415379621402251426>: {message}")
+        await owner.send(f"<:2633notification:1415383262775218378>: {message}")
 
 
 @bot.command()
@@ -174,7 +174,7 @@ async def owner(ctx):
     owner_id = int(os.getenv('OWNER'))
     owner = await bot.fetch_user(owner_id)
     if owner:
-        await ctx.send(f"<a:owner:1415352659552243833> Bot sahibi: {owner.mention}")
+        await ctx.send(f"<a:owner:1415434012419424458> Bot sahibi: {owner.mention}")
     else:
         await ctx.send("<a:Wrong:1415383907049672794> Bot sahibi bulunamadı.")
 
@@ -187,7 +187,7 @@ async def close(ctx):
     
     embed = discord.Embed(
         title="Bot Kapatılıyor",
-        description="<a:3983_My_best_verified:1415374950763855953> Bot Kapatıldı!",
+        description="<a:Mybest:1415383385735696596> Bot Kapatıldı!",
         timestamp=turkey_time,
         color=0xff0000
     )
@@ -199,7 +199,7 @@ async def close(ctx):
 
     else:
         await ctx.send("<a:Wrong:1415383907049672794> Bu komutu sadece bot sahibi kullanabilir.")
-        await notify_owner(ctx, "<a:owner:1415352659552243833> Kapatma komutu yetkisiz bir kullanıcı tarafından denendi. <a:9596wrong:1415369131301142548>")
+        await notify_owner(ctx, "<a:owner:1415434012419424458> Kapatma komutu yetkisiz bir kullanıcı tarafından denendi. <a:9596wrong:1415369131301142548>")
 
         
 # .env dosyasından TOKEN değişkenini oku
