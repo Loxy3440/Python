@@ -170,14 +170,22 @@ async def notify_owner(ctx, message):
 
 
 @bot.command()
-async def owner(ctx):
+async def dev(ctx):
     owner_id = int(os.getenv('OWNER'))
     owner = await bot.fetch_user(owner_id)
     if owner:
-        await ctx.send(f"<a:owner:1415434012419424458> **Bot sahibi:** {owner.mention}")
+        await ctx.send(f"<:1000045049:1415450526568550582> **Bot sahibi:** {owner.mention}")
     else:
         await ctx.send("<a:Wrong:1415383907049672794> Bot sahibi bulunamadı.")
 
+@bot.command()
+async def developer(ctx):
+    owner_id = int(os.getenv('OWNER'))
+    owner = await bot.fetch_user(owner_id)
+    if owner:
+        await ctx.send(f"<:1000045049:1415450526568550582> **Bot sahibi:** {owner.mention}")
+    else:
+        await ctx.send("<a:Wrong:1415383907049672794> Bot sahibi bulunamadı.")
 
 @bot.command()
 async def close(ctx):
@@ -186,7 +194,7 @@ async def close(ctx):
     owner_id = int(os.getenv('OWNER'))
     
     embed = discord.Embed(
-        title="Bot Kapatılıyor",
+        title="Bot Kapatılıyor <a:Verified22:1415383341586317433> ",
         description="<a:Mybest:1415383385735696596> Bot Kapatıldı!",
         timestamp=turkey_time,
         color=0xff0000
@@ -195,6 +203,7 @@ async def close(ctx):
     embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
     if ctx.author.id == owner_id:
         await ctx.send(embed=embed)
+        await notify_owner(ctx, "<a:owner:1415434012419424458> Başarıyla Bot Kapandı, **Lütfen Tekrar Renderdan Açmayı Unutma!**")
         await bot.close()
 
     else:
