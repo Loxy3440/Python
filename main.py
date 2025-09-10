@@ -79,31 +79,6 @@ async def deneme(ctx):
     await ctx.send("__TEST AŞAMASINDA__. **MERAK ETTİĞİN BİR ŞEY VARSA <@950430488454127627> BU HESABA SORABİLİRSİN** <a:8484hearts:1415374810497941574> ")
 
 
-
-
-@bot.command()
-async def pythontr(ctx):
-    utc_time = datetime.datetime.utcnow()
-    turkey_time = utc_time + datetime.timedelta(hours=3)
-
-    embed = discord.Embed(
-        title="<:64443python:1415364319109185689> Python",
-        description="Python öğrenmek için aşağıdaki butonları kullanabilirsiniz!",
-        color=0xcc0000,
-        timestamp=turkey_time
-    )
-    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1413561809771692239/1413992512917606514/python-logo.png?ex=68bfece5&is=68be9b65&hm=139dcd1ededf39864526676613c0b09ff3d71f4d418343a13d6575e62d420ea2&")
-    embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
-    view = discord.ui.View()
-    view.add_item(discord.ui.Button(label="Video#1", url="https://youtu.be/_wZUNiGtkcw?si=eL_ybYhg_v5w6TqA", emoji="<:youtube:1414975498467016764>", style=discord.ButtonStyle.red))
-    view.add_item(discord.ui.Button(label="Video#2", url="https://youtu.be/CEr_UiR4Gvk?si=rzu8yYYvu5THBFEt", emoji="<:youtube:1414975498467016764>", style=discord.ButtonStyle.red))
-    view.add_item(discord.ui.Button(label="Video#3", url="https://youtu.be/g4oIzj8fiCQ?si=i437FCMJqtVlff4Y", emoji="<:youtube:1414975498467016764>", style=discord.ButtonStyle.red))
-    view.add_item(discord.ui.Button(label="Video#4", url="https://youtu.be/0KQp2v5vrV8?si=XpNLHmspKkTtInb8", emoji="<:youtube:1414975498467016764>", style=discord.ButtonStyle.red))
-    view.add_item(discord.ui.Button(label="Video#5", url="https://youtu.be/g4oIzj8fiCQ?si=N4qzik7l1U_sYd8D", emoji="<:youtube:1414975498467016764>", style=discord.ButtonStyle.red))
-    await ctx.send(embed=embed, view=view)
-
-
-
 @bot.command()
 async def pythontr(ctx):
     utc_time = datetime.datetime.utcnow()
