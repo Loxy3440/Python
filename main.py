@@ -60,7 +60,7 @@ async def ping(ctx):
 
     embed = discord.Embed(
         title="Python Bot",
-        description=f" **Latency**: {round(bot.latency * 1000)}ms <:Ping:1415383443235147848>",
+        description=f" **Latency**: {round(bot.latency * 1000)}ms <a:Wifi:1415437265915871295>",
         color=0x216bff,
         timestamp=turkey_time
     )
@@ -166,7 +166,7 @@ async def notify_owner(ctx, message):
     owner_id = int(os.getenv('OWNER'))
     owner = await bot.fetch_user(owner_id)
     if owner:
-        await owner.send(f"<:2633notification:1415383262775218378>: {message}")
+        await owner.send(f"<:xd:1415440381146955966>: {message}")
 
 
 @bot.command()
@@ -174,7 +174,7 @@ async def owner(ctx):
     owner_id = int(os.getenv('OWNER'))
     owner = await bot.fetch_user(owner_id)
     if owner:
-        await ctx.send(f"<a:owner:1415434012419424458> Bot sahibi: {owner.mention}")
+        await ctx.send(f"<a:owner:1415434012419424458> **Bot sahibi:** {owner.mention}")
     else:
         await ctx.send("<a:Wrong:1415383907049672794> Bot sahibi bulunamadı.")
 
