@@ -22,24 +22,11 @@ bot.afk_users = {}
 @bot.event
 async def on_ready():
     print(f'We have logged in as {bot.user}')
-
-    
-    bot.loop.create_task(update_presence())
-
-async def update_presence():
-    await bot.wait_until_ready()
-    
-    while not bot.is_closed():
-        try:
-            total_users = sum(len(guild.members) for guild in bot.guilds)
-            activity = discord.Activity(
-                type=discord.ActivityType.watching,
-                name=f"{total_users} kullanıcı"
-            )
-            await bot.change_presence(activity=activity)
-            await asyncio.sleep(300)  # 5 dakika
-        except:
-            await asyncio.sleep(60)
+        total_users = sum(len(g.members) for g in bot.guilds)
+    await bot.change_presence(activity=discord.Activity(
+        type=discord.ActivityType.watching,
+        name=f"{total_users} kullanıcı"
+    ))
 
 @bot.event
 async def on_command_error(ctx, error):
