@@ -26,13 +26,13 @@ async def on_ready():
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
-        await ctx.send("<a:9596wrong:1415369131301142548> Bu komut bulunamadı! Lütfen geçerli bir komut girin.")
+        await ctx.send("<a:Wrong:1415383907049672794> Bu komut bulunamadı! Lütfen geçerli bir komut girin.")
     elif isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send("<a:9596wrong:1415369131301142548> Eksik argüman! Lütfen tüm gerekli argümanları sağlayın.")
+        await ctx.send("<a:Wrong:1415383907049672794> Eksik argüman! Lütfen tüm gerekli argümanları sağlayın.")
     elif isinstance(error, commands.CheckFailure):
-        await ctx.send("<a:9596wrong:1415369131301142548> Bu komutu kullanmak için gerekli izne sahip değilsiniz.")
+        await ctx.send("<a:Wrong:1415383907049672794>> Bu komutu kullanmak için gerekli izne sahip değilsiniz.")
     else:
-        await ctx.send("<a:9596wrong:1415369131301142548> Bir hata oluştu. Lütfen daha sonra tekrar deneyin.")
+        await ctx.send("<a:Wrong:1415383907049672794> Bir hata oluştu. Lütfen daha sonra tekrar deneyin.")
         raise error
 
 @bot.event
@@ -68,7 +68,7 @@ async def ping(ctx):
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1413561809771692239/1413610825075261480/python-logo.png?ex=68bc8f2c&is=68bb3dac&hm=7e806c6f781e42a2fda97343ffc030b890d341c81b446ce091ee3541758fc5aa&")
     embed.add_field(name="Library", value="py-cord", inline=True)
     embed.add_field(name="Version", value="3.11.9", inline=True)
-    embed.add_field(name="Language", value="<:64443python:1415364319109185689> Python", inline=True)
+    embed.add_field(name="Language", value="<:1000045010:1415431159130620024> Python", inline=True)
     embed.add_field(name="Hosted on", value="Render", inline=True)
     embed.add_field(name="My Prefix", value="**!**", inline=True)
     embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
@@ -85,7 +85,7 @@ async def pythontr(ctx):
     turkey_time = utc_time + datetime.timedelta(hours=3)
 
     embed = discord.Embed(
-        title="<:64443python:1415364319109185689> Python",
+        title="<:1000045010:1415431159130620024> Python",
         description="Python öğrenmek için aşağıdaki butonları kullanabilirsiniz!",
         color=0xcc0000,
         timestamp=turkey_time
@@ -106,7 +106,7 @@ async def pythonen(ctx):
     turkey_time = utc_time + datetime.timedelta(hours=3)
     
     embed = discord.Embed(
-        title="<:64443python:1415364319109185689> Python",
+        title="<:1000045010:1415431159130620024> Python",
         description="To learn Python, you can use the buttons below!",
         color=0xcc0000,
         timestamp=turkey_time
@@ -176,7 +176,7 @@ async def owner(ctx):
     if owner:
         await ctx.send(f"<a:owner:1415352659552243833> Bot sahibi: {owner.mention}")
     else:
-        await ctx.send("<a:9596wrong:1415369131301142548> Bot sahibi bulunamadı.")
+        await ctx.send("<a:Wrong:1415383907049672794> Bot sahibi bulunamadı.")
 
 
 @bot.command()
@@ -198,7 +198,7 @@ async def close(ctx):
         await bot.close()
 
     else:
-        await ctx.send("<a:9596wrong:1415369131301142548> Bu komutu sadece bot sahibi kullanabilir.")
+        await ctx.send("<a:Wrong:1415383907049672794> Bu komutu sadece bot sahibi kullanabilir.")
         await notify_owner(ctx, "<a:owner:1415352659552243833> Kapatma komutu yetkisiz bir kullanıcı tarafından denendi. <a:9596wrong:1415369131301142548>")
 
         
