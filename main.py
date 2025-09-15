@@ -69,7 +69,7 @@ async def ping(ctx):
         color=0x216bff,
         timestamp=turkey_time
     )
-    embed.add_field(name=" <a:owner:1415434012419424458> Founder <a:owner:1415434012419424458>", value="Loxy", inline=False,)
+    embed.add_field(name=" <a:owner:1415434012419424458> Founder <a:owner:1415434012419424458>", value="**Loxy**", inline=False,)
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1413561809771692239/1413610825075261480/python-logo.png?ex=68bc8f2c&is=68bb3dac&hm=7e806c6f781e42a2fda97343ffc030b890d341c81b446ce091ee3541758fc5aa&")
     embed.add_field(name="Library", value="py-cord", inline=True)
     embed.add_field(name="Version", value="**3.11.9**", inline=True)
@@ -84,13 +84,6 @@ async def ping(ctx):
 async def deneme(ctx):
     await ctx.send("<a:1000045039:1415459602656657429> __TEST AŞAMASINDA__. **MERAK ETTİĞİN BİR ŞEY VARSA <@950430488454127627> BU HESABA SORABİLİRSİN** <a:Hearts:1415383408208511158> <a:1000045256:1415471089290707094> ")
 
-@bot.command()
-async def hasansanabasan(ctx):
-    await ctx.send("https://share.creavite.co/68c85bc71751b776d92bef7b.gif")
-
-@bot.command()
-async def vadaa(ctx):
-    await ctx.send(" <a:Party:1417218071512355078><a:Party:1417218071512355078><a:Party:1417218071512355078> Vadaa <a:Party:1417218071512355078><a:Party:1417218071512355078><a:Party:1417218071512355078>  https://share.creavite.co/68c85bc71751b776d92bef7b.gif")
 
 @bot.command()
 async def pythontr(ctx):
