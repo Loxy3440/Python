@@ -25,7 +25,7 @@ async def on_ready():
     total_users = sum(len(g.members) for g in bot.guilds)
     await bot.change_presence(activity=discord.Activity(
         type=discord.ActivityType.watching, 
-        name=f"{total_users} kullanıcı"
+        name=f"Loxy's Dev"
     ))
 
 @bot.event
@@ -65,11 +65,11 @@ async def ping(ctx):
 
     embed = discord.Embed(
         title="Python Bot",
-        description=f" **Latency**: {round(bot.latency * 1000)}ms <a:1000045255:1415471057254617129>",
+        description=f" <a:Wifi:1415437265915871295> **Latency**: {round(bot.latency * 1000)}ms <a:Wifi:1415437265915871295>",
         color=0x216bff,
         timestamp=turkey_time
     )
-    embed.add_field(name="Founder", value="Loxy", inline=False,)
+    embed.add_field(name=" <a:owner:1415434012419424458> Founder", value="Loxy", inline=False,)
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1413561809771692239/1413610825075261480/python-logo.png?ex=68bc8f2c&is=68bb3dac&hm=7e806c6f781e42a2fda97343ffc030b890d341c81b446ce091ee3541758fc5aa&")
     embed.add_field(name="Library", value="py-cord", inline=True)
     embed.add_field(name="Version", value="3.11.9", inline=True)
@@ -130,9 +130,6 @@ async def ahmetkaya(ctx):
     await ctx.send("https://cdn.discordapp.com/attachments/1413561809771692239/1413623961190793347/Screenshot_20250816-170701.jpg?ex=68bc9b68&is=68bb49e8&hm=274cba55687980117d754d584566ee10db57fe59e92fb4c1b01a06b229a95837&")
 
 
-
-
-
 # AFK System
 @bot.command()
 async def afk(ctx, *, reason=None):
@@ -179,7 +176,7 @@ async def dev(ctx):
     owner_id = int(os.getenv('OWNER'))
     owner = await bot.fetch_user(owner_id)
     if owner:
-        await ctx.send(f"<:1000045049:1415450526568550582> **Bot sahibi:** {owner.mention}")
+        await ctx.send(f"<a:1000045251:1415465673995456653> **Bot sahibi:** {owner.mention}")
     else:
         await ctx.send("<a:Wrong:1415383907049672794> Bot sahibi bulunamadı.")
 
@@ -188,7 +185,7 @@ async def developer(ctx):
     owner_id = int(os.getenv('OWNER'))
     owner = await bot.fetch_user(owner_id)
     if owner:
-        await ctx.send(f"<:1000045049:1415450526568550582> **Bot sahibi:** {owner.mention}")
+        await ctx.send(f"<a:1000045251:1415465673995456653> **Bot sahibi:** {owner.mention}")
     else:
         await ctx.send("<a:Wrong:1415383907049672794> Bot sahibi bulunamadı.")
 
