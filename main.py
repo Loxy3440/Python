@@ -76,7 +76,7 @@ async def ping(ctx):
     embed.add_field(name="Language", value="<:1000045010:1415431159130620024>", inline=True)
     embed.add_field(name="Hosted on", value="Render", inline=True)
     embed.add_field(name="My Prefix", value="**!**", inline=True)
-    embed.add_field(name="<a:1000045251:1415465673995456653> Developer", value="Loxy <a:1000045251:1415465673995456653> ", inline=False)
+    embed.add_field(name="<a:1000045251:1415465673995456653> Developer <a:1000045251:1415465673995456653> ", value="Loxy", inline=False)
     embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
     await ctx.send(embed=embed)
 
