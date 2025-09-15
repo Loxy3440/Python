@@ -72,11 +72,11 @@ async def ping(ctx):
     embed.add_field(name=" <a:owner:1415434012419424458> Founder <a:owner:1415434012419424458>", value="Loxy", inline=False,)
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1413561809771692239/1413610825075261480/python-logo.png?ex=68bc8f2c&is=68bb3dac&hm=7e806c6f781e42a2fda97343ffc030b890d341c81b446ce091ee3541758fc5aa&")
     embed.add_field(name="Library", value="py-cord", inline=True)
-    embed.add_field(name="Version", value="3.11.9", inline=True)
+    embed.add_field(name="Version", value="**3.11.9**", inline=True)
     embed.add_field(name="Language", value="<:1000045010:1415431159130620024>", inline=True)
     embed.add_field(name="Hosted on", value="Render", inline=True)
     embed.add_field(name="My Prefix", value="**!**", inline=True)
-    embed.add_field(name="<a:1000045251:1415465673995456653> Developer <a:1000045251:1415465673995456653> ", value="Loxy", inline=False)
+    embed.add_field(name="<a:1000045251:1415465673995456653> Developer <a:1000045251:1415465673995456653> ", value="**Loxy**", inline=False)
     embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
     await ctx.send(embed=embed)
 
@@ -84,6 +84,24 @@ async def ping(ctx):
 async def deneme(ctx):
     await ctx.send("<a:1000045039:1415459602656657429> __TEST AŞAMASINDA__. **MERAK ETTİĞİN BİR ŞEY VARSA <@950430488454127627> BU HESABA SORABİLİRSİN** <a:Hearts:1415383408208511158> <a:1000045256:1415471089290707094> ")
 
+@bot.command()
+async def hasansanabasan(ctx):
+    await ctx.send("https://share.creavite.co/68c85bc71751b776d92bef7b.gif")
+
+@bot.command()
+async def vadaa(ctx):
+    turkey_tz = pytz.timezone('Europe/Istanbul')
+    turkey_time = datetime.datetime.now(turkey_tz)
+    embed = discord.Embed(
+        title=" <a:PartyZoom:1417218088897744936>Vadaa<a:Party:1417218071512355078> ",
+        description=">>> https://share.creavite.co/68c85bc71751b776d92bef7b.gif",
+        timestamp=turkey_time,
+        color=0xff0000
+    )
+    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1413561809771692239/1413992512917606514/python-logo.png?ex=68bfece5&is=68be9b65&hm=139dcd1ededf39864526676613c0b09ff3d71f4d418343a13d6575e62d420ea2&")
+    embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
+    if ctx.author.id == owner_id:
+        await ctx.send(embed=embed)
 
 @bot.command()
 async def pythontr(ctx):
@@ -157,8 +175,8 @@ from discord.ext import commands
 async def restart(ctx):
     deploy_hook = os.getenv('RENDER_DEPLOY_HOOK')
     requests.post(deploy_hook)
-    await notify_owner(" <a:owner:1415434012419424458> Bot Başarıyla Yeniden Başlatıldı.")
     await ctx.send("<a:discordloading:1415383563154620436> Bot yeniden başlatılıyor...")
+    await notify_owner(" <a:owner:1415434012419424458> Bot Başarıyla Yeniden Başlatıldı.")
 
 @bot.command()
 async def haddinibil(ctx):
