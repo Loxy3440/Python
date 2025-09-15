@@ -90,7 +90,7 @@ async def hasansanabasan(ctx):
 
 @bot.command()
 async def vadaa(ctx):
-    await ctx.send(" <a:Party:1417218071512355078><a:Party:1417218071512355078><a:Party:1417218071512355078> Vadaa <a:Party:1417218071512355078><a:Party:1417218071512355078><a:Party:1417218071512355078> https://share.creavite.co/68c85bc71751b776d92bef7b.gif")
+    await ctx.send(" <a:Party:1417218071512355078><a:Party:1417218071512355078><a:Party:1417218071512355078> Vadaa <a:Party:1417218071512355078><a:Party:1417218071512355078><a:Party:1417218071512355078>  https://share.creavite.co/68c85bc71751b776d92bef7b.gif")
 
 @bot.command()
 async def pythontr(ctx):
