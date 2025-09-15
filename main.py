@@ -98,7 +98,7 @@ async def vadaa(ctx):
         timestamp=turkey_time,
         color=0xff0000
     )
-    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1413561809771692239/1413992512917606514/python-logo.png?ex=68bfece5&is=68be9b65&hm=139dcd1ededf39864526676613c0b09ff3d71f4d418343a13d6575e62d420ea2&")
+    embed.set_thumbnail(url="https://share.creavite.co/68c85bc71751b776d92bef7b.gif")
     embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
         await ctx.send(embed=embed)
 
