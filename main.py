@@ -92,7 +92,6 @@ async def hasansanabasan(ctx):
 async def vadaa(ctx):
     turkey_tz = pytz.timezone('Europe/Istanbul')
     turkey_time = datetime.datetime.now(turkey_tz)
-    owner_id = int(os.getenv('OWNER'))
     embed = discord.Embed(
         title=" <a:Party:1417218071512355078><a:Party:1417218071512355078><a:Party:1417218071512355078> Vadaa <a:Party:1417218071512355078><a:Party:1417218071512355078><a:Party:1417218071512355078> ",
         description=".",
@@ -101,7 +100,6 @@ async def vadaa(ctx):
     )
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1413561809771692239/1413992512917606514/python-logo.png?ex=68bfece5&is=68be9b65&hm=139dcd1ededf39864526676613c0b09ff3d71f4d418343a13d6575e62d420ea2&")
     embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
-    if ctx.author.id == owner_id:
         await ctx.send(embed=embed)
 
 @bot.command()
