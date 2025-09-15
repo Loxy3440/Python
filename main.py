@@ -69,13 +69,14 @@ async def ping(ctx):
         color=0x216bff,
         timestamp=turkey_time
     )
-    embed.add_field(name=" <a:owner:1415434012419424458> Founder", value="Loxy", inline=False,)
+    embed.add_field(name=" <a:owner:1415434012419424458> Founder <a:owner:1415434012419424458>", value="Loxy", inline=False,)
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1413561809771692239/1413610825075261480/python-logo.png?ex=68bc8f2c&is=68bb3dac&hm=7e806c6f781e42a2fda97343ffc030b890d341c81b446ce091ee3541758fc5aa&")
     embed.add_field(name="Library", value="py-cord", inline=True)
     embed.add_field(name="Version", value="3.11.9", inline=True)
     embed.add_field(name="Language", value="<:1000045010:1415431159130620024>", inline=True)
     embed.add_field(name="Hosted on", value="Render", inline=True)
     embed.add_field(name="My Prefix", value="**!**", inline=True)
+    embed.add_field(name="<a:1000045251:1415465673995456653> Developer", value="Loxy <a:1000045251:1415465673995456653> ", inline=False)
     embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
     await ctx.send(embed=embed)
 
@@ -156,6 +157,7 @@ from discord.ext import commands
 async def restart(ctx):
     deploy_hook = os.getenv('RENDER_DEPLOY_HOOK')
     requests.post(deploy_hook)
+    await notify_owner(" <a:owner:1415434012419424458> Bot Başarıyla Yeniden Başlatıldı.")
     await ctx.send("<a:discordloading:1415383563154620436> Bot yeniden başlatılıyor...")
 
 @bot.command()
