@@ -90,17 +90,7 @@ async def hasansanabasan(ctx):
 
 @bot.command()
 async def vadaa(ctx):
-    turkey_tz = pytz.timezone('Europe/Istanbul')
-    turkey_time = datetime.datetime.now(turkey_tz)
-    embed = discord.Embed(
-        title=" <a:Party:1417218071512355078><a:Party:1417218071512355078><a:Party:1417218071512355078> Vadaa <a:Party:1417218071512355078><a:Party:1417218071512355078><a:Party:1417218071512355078> ",
-        description=".",
-        timestamp=turkey_time,
-        color=0xff0000
-    )
-    embed.set_thumbnail(url="https://share.creavite.co/68c85bc71751b776d92bef7b.gif")
-    embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
-        await ctx.send(embed=embed)
+    await ctx.send(" <a:Party:1417218071512355078><a:Party:1417218071512355078><a:Party:1417218071512355078> Vadaa <a:Party:1417218071512355078><a:Party:1417218071512355078><a:Party:1417218071512355078> https://share.creavite.co/68c85bc71751b776d92bef7b.gif")
 
 @bot.command()
 async def pythontr(ctx):
