@@ -94,8 +94,8 @@ async def vadaa(ctx):
     turkey_time = datetime.datetime.now(turkey_tz)
     owner_id = int(os.getenv('OWNER'))
     embed = discord.Embed(
-        title=" <a:PartyZoom:1417218088897744936>Vadaa<a:Party:1417218071512355078> ",
-        description=">>> https://share.creavite.co/68c85bc71751b776d92bef7b.gif",
+        title=" <a:Party:1417218071512355078><a:Party:1417218071512355078><a:Party:1417218071512355078> Vadaa <a:Party:1417218071512355078><a:Party:1417218071512355078><a:Party:1417218071512355078> ",
+        description="https://share.creavite.co/68c85bc71751b776d92bef7b.gif",
         timestamp=turkey_time,
         color=0xff0000
     )
