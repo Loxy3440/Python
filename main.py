@@ -54,7 +54,7 @@ async def on_message(message):
     for user in message.mentions:
         if user.id in bot.afk_users:
             reason = bot.afk_users[user.id]
-            await message.channel.send(f"{user.name} şu anda <a:afk:1415383493613064303> **afk!** Sebep: **{reason}** <:Cat:1415447386632880139> ")
+            await message.channel.send(f"{user.name} şu anda <:9225afk:1418323034971832521> **AFK!** Sebep: **{reason}**    <:Cat:1415447386632880139> ")
 
     await bot.process_commands(message)
 
@@ -64,7 +64,7 @@ async def ping(ctx):
     turkey_time = datetime.datetime.now(turkey_tz)
 
     embed = discord.Embed(
-        title="Python Bot",
+        title="Python",
         description=f" <a:Wifi:1415437265915871295> **Latency**: {round(bot.latency * 1000)}ms <a:Wifi:1415437265915871295>",
         color=0x216bff,
         timestamp=turkey_time
@@ -76,7 +76,7 @@ async def ping(ctx):
     embed.add_field(name="Language", value="<:1000045010:1415431159130620024>", inline=True)
     embed.add_field(name="Hosted on", value="Render", inline=True)
     embed.add_field(name="My Prefix", value="**!**", inline=True)
-    embed.add_field(name="<a:1000045251:1415465673995456653> Developer <a:1000045251:1415465673995456653> ", value="**Loxy**", inline=False)
+    embed.add_field(name="<a:1000045251:1415465673995456653> Developer <a:1000045251:1415465673995456653> ", value=" **Loxy**", inline=False)
     embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
     await ctx.send(embed=embed)
 
@@ -84,6 +84,53 @@ async def ping(ctx):
 async def deneme(ctx):
     await ctx.send("<a:1000045039:1415459602656657429> __TEST AŞAMASINDA__. **MERAK ETTİĞİN BİR ŞEY VARSA <@950430488454127627> BU HESABA SORABİLİRSİN** <a:Hearts:1415383408208511158> <a:1000045256:1415471089290707094> ")
 
+@bot.command()
+async def nah(ctx):
+    await ctx.send("https://cdn.discordapp.com/attachments/1415027311807299695/1418297339600306237/Screenshot_20250816-130442.jpg?ex=68cd9bd4&is=68cc4a54&hm=4771d8e64ff7b7461be75d50c6d8e4078a3d8268e2901cf74107fcae527c3675&")
+
+@bot.command()
+async def help(ctx):
+    turkey_tz = pytz.timezone('Europe/Istanbul')
+    turkey_time = datetime.datetime.now(turkey_tz)
+
+    embed = discord.Embed(
+        title="<:12895early:1418321924068606034> Help",
+        description="Write **!helptr** or **!helpen**",
+        timestamp=turkey_time,
+        color=0xff0000
+    )
+    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1413561809771692239/1413992512917606514/python-logo.png?ex=68bfece5&is=68be9b65&hm=139dcd1ededf39864526676613c0b09ff3d71f4d418343a13d6575e62d420ea2&")
+    embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url)
+    await ctx.send(embed=embed)
+
+@bot.command()
+async def helptr(ctx):
+    turkey_tz = pytz.timezone('Europe/Istanbul')
+    turkey_time = datetime.datetime.now(turkey_tz)
+
+    embed = discord.Embed(
+        title="Help Menüsü",
+        description="Türkçe Komutlar Gösteriliyor. <a:8480peepoturkey:1418323342896664718>",
+        timestamp=turkey_time,
+        color=0xff0000
+    )
+    embed.add_field(name="**!haddinibil**", value="haddinibil", inline=True)
+    embed.add_field(name="**!afk**", value="Seni <:9225afk:1418323034971832521> Yapar", inline=True)
+    embed.add_field(name="**!close**", value="<a:1000045251:1415465673995456653> Loxy'e Özel", inline=True)
+    embed.add_field(name="**!nah**", value="__NAH__", inline=True)
+    embed.add_field(name="**!restart**", value="<a:1000045251:1415465673995456653> Loxy'e Özel", inline=True)
+    embed.add_field(name="**!deneme**", value="sakındeneme", inline=True)
+    embed.add_field(name="**!dev**", value="<a:1000045251:1415465673995456653>", inline=True)
+    embed.add_field(name="**!developer**", value="<a:1000045251:1415465673995456653>", inline=True)
+    embed.add_field(name="**!helpen**", value="İngilizce Help Menüsü", inline=False)
+    embed.add_field(name="**!helptr**", value="Türkçe Help Menüsü", inline=False)
+    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1413561809771692239/1413992512917606514/python-logo.png?ex=68bfece5&is=68be9b65&hm=139dcd1ededf39864526676613c0b09ff3d71f4d418343a13d6575e62d420ea2&")
+    embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url )
+    await ctx.send(embed=embed)
+
+@bot.command()
+async def suicide(ctx):
+    await ctx.send(f"{ctx.author.mention} <a:97128gun:1418321959078465597>")
 
 @bot.command()
 async def pythontr(ctx):
