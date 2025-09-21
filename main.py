@@ -25,7 +25,7 @@ async def on_ready():
     total_users = sum(len(g.members) for g in bot.guilds)
     await bot.change_presence(activity=discord.Activity(
         type=discord.ActivityType.watching, 
-        name=f"Loxy's Dev"
+        name=f"Loxy's Dev | !help"
     ))
 
 @bot.event
@@ -118,19 +118,19 @@ async def helptr(ctx):
         > **!nah** **---** __NAH!__
         > **!ahmetkaya** **---** __Ahmet Stone__
         > **!deneme** **---** __DENEME!__
-        # <a:1384273237034401927:1415674228857897021> -# **DEVAMI YAKINDA**
+        # -# <a:1384273237034401927:1415674228857897021> **DEVAMI YAKINDA**
         ** <a:1000045251:1415465673995456653> `Developer Komutları`**
         > **!dev `OR` !developer**
         > **!restart** **---** __Bota Restart Atar__
         > **!close** **---** __Botu Kapatır__
-        # <a:1384273237034401927:1415674228857897021> -# **DEVAMI YAKINDA**
+        # -# <a:1384273237034401927:1415674228857897021> **DEVAMI YAKINDA**
         ** <a:1347108314454167583:1415674138563186738> ``Yardımcı Komutlar``**
         > **!afk {Reason}** **---** __Seni Afk İlan Eder__
         > **!helptr** **--** <a:8480peepoturkey:1415710999910285413>
         > **!helpen** **--** <:99188flagusuk1:1419161283051261972>
         > **!pythontr** **--** __Python İle İlgili Kaynaklar Sunar__(<a:8480peepoturkey:1418323342896664718>)
         > **!pythonen** **--**__Python İle İlgili Kaynaklar Sunar__(<:99188flagusuk1:1419161283051261972>)
-        # <a:1384273237034401927:1415674228857897021> -# **DEVAMI YAKINDA**
+        # -# <a:1384273237034401927:1415674228857897021> **DEVAMI YAKINDA**
         """,
         timestamp=turkey_time,
         color=0xff0000
