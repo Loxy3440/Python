@@ -110,22 +110,33 @@ async def helptr(ctx):
 
     embed = discord.Embed(
         title="Help Menüsü",
-        description="Türkçe Komutlar Gösteriliyor. <a:8480peepoturkey:1418323342896664718>",
+        description=
+        """ **Türkçe Komutlar Gösteriliyor. <a:8480peepoturkey:1418323342896664718>**
+        
+        ** <a:PartyZoom:1417218088897744936> ``Troll Komutlar``**
+        > **!haddinibil** **---** __Haddini Bileceksin!__
+        > **!nah** **---** __NAH!__
+        > **!ahmetkaya** **---** __Ahmet Stone__
+        > **!deneme** **---** __DENEME!__
+        # <a:1384273237034401927:1415674228857897021> -# **DEVAMI YAKINDA**
+        ** <a:1000045251:1415465673995456653> `Developer Komutları`**
+        > **!dev `OR` !developer**
+        > **!restart** **---** __Bota Restart Atar__
+        > **!close** **---** __Botu Kapatır__
+        # <a:1384273237034401927:1415674228857897021> -# **DEVAMI YAKINDA**
+        ** <a:1347108314454167583:1415674138563186738> ``Yardımcı Komutlar``**
+        > **!afk {Reason}** **---** __Seni Afk İlan Eder__
+        > **!helptr** **--** <a:8480peepoturkey:1415710999910285413>
+        > **!helpen** **--** <:99188flagusuk1:1419161283051261972>
+        > **!pythontr** **--** __Python İle İlgili Kaynaklar Sunar__(<a:8480peepoturkey:1418323342896664718>)
+        > **!pythonen** **--**__Python İle İlgili Kaynaklar Sunar__(<:99188flagusuk1:1419161283051261972>)
+        # <a:1384273237034401927:1415674228857897021> -# **DEVAMI YAKINDA**
+        """,
         timestamp=turkey_time,
         color=0xff0000
     )
-    embed.add_field(name="**!haddinibil**", value="haddinibil", inline=True)
-    embed.add_field(name="**!afk**", value="Seni <:9225afk:1418323034971832521> Yapar", inline=True)
-    embed.add_field(name="**!close**", value="**Loxy'**e Özel", inline=False)
-    embed.add_field(name="**!nah**", value="__NAH__", inline=True)
-    embed.add_field(name="**!restart**", value="**Loxy'**e Özel", inline=True)
-    embed.add_field(name="**!deneme**", value="sakındeneme", inline=False)
-    embed.add_field(name="**!dev**", value="<a:1000045251:1415465673995456653>", inline=True)
-    embed.add_field(name="**!developer**", value="<a:1000045251:1415465673995456653>", inline=True)
-    embed.add_field(name="**!helpen**", value="İngilizce Help Menüsü", inline=False)
-    embed.add_field(name="**!helptr**", value="Türkçe Help Menüsü", inline=True)
-    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1413561809771692239/1413992512917606514/python-logo.png?ex=68bfece5&is=68be9b65&hm=139dcd1ededf39864526676613c0b09ff3d71f4d418343a13d6575e62d420ea2&")
     embed.set_footer(text=f"{ctx.author.name}", icon_url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.default_avatar.url )
+    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/1413561809771692239/1419163052259151933/26210-owner.gif?ex=68d0c216&is=68cf7096&hm=8eb7e7456c6dab67c14ee242cef6f6b4a4c7b1b1f1a599e59e1e9e2732a78024&")
     await ctx.send(embed=embed)
 
 @bot.command()
