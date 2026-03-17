@@ -279,7 +279,7 @@ if not token:
     print("HATA: .env dosyasında TOKEN bulunamadı!")
     print("Lütfen .env dosyanızı kontrol edin:")
     print("TOKEN=bot_tokeniniz_buraya")
-    print("owner=950430488454127627")
+    print("owner=1400335230220505089")
     exit(1)
 
 bot.run(token)
